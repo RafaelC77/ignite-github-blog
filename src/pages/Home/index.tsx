@@ -1,10 +1,10 @@
-import { Header } from "../../components/Header";
+import { Profile } from "./components/Profile";
+import { HomeContainer } from "./styles";
 
 export function Home() {
   return (
-    <>
-      <Header />
-      <h1>Home!</h1>
-    </>
+    <HomeContainer>
+      <Profile />
+    </HomeContainer>
   );
 }
