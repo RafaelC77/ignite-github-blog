@@ -35,8 +35,6 @@ export function Posts() {
       },
     });
 
-    console.log(response.data);
-
     const updatedPosts = {
       totalCount: response.data.total_count,
       postsList: response.data.items.map((post: any) => {

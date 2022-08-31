@@ -42,8 +42,6 @@ export function Profile() {
     fetchProfile();
   }, []);
 
-  console.log(profileData);
-
   return (
     <ProfileContainer>
       <ProfileContent>
