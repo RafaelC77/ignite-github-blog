@@ -16,4 +16,13 @@ export const GlobalStyle = createGlobalStyle`
     body, input-security, textarea, button {
         font: 400 1rem Nunito, sans-serif;
     }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
 `;

@@ -77,6 +77,7 @@ export function Posts() {
               title={post.title}
               updatedAt={post.updatedAt}
               content={post.content}
+              number={post.number}
             />
           );
         })}

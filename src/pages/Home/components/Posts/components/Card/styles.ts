@@ -1,10 +1,22 @@
 import styled from "styled-components";
 
-export const CardComponent = styled.li`
+export const CardContainer = styled.li`
   max-width: 416px;
+
+  a:hover {
+    text-decoration: none;
+  }
+`;
+
+export const CardContent = styled.div`
+  height: 100%;
   padding: 2rem;
   background-color: ${(props) => props.theme["base-post"]};
   border-radius: 10px;
+
+  &:hover {
+    outline: 2px solid ${(props) => props.theme["base-label"]};
+  }
 
   p {
     margin-top: 1.2rem;

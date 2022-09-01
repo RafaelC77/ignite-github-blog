@@ -31,12 +31,18 @@ export const SearchBox = styled.input`
   border: 1px solid ${(props) => props.theme["base-border"]};
   border-radius: 6px;
   padding: 0.75rem 1rem;
+  outline: unset;
 
   font-size: 1rem;
   color: ${(props) => props.theme["base-label"]};
 
   &::placeholder {
     color: ${(props) => props.theme["base-label"]};
+  }
+
+  &:focus {
+    border-color: ${(props) => props.theme.blue};
+    color: ${(props) => props.theme["base-text"]};
   }
 `;
 
