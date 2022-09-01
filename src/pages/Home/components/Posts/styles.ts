@@ -24,25 +24,28 @@ export const PostsInfo = styled.div`
   }
 `;
 
-export const SearchBox = styled.input`
+export const SearchBox = styled.form`
   margin-top: 0.75rem;
-  appearance: none;
-  background: ${(props) => props.theme["base-input"]};
-  border: 1px solid ${(props) => props.theme["base-border"]};
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  outline: unset;
 
-  font-size: 1rem;
-  color: ${(props) => props.theme["base-label"]};
-
-  &::placeholder {
+  input {
+    appearance: none;
+    width: 100%;
+    background: ${(props) => props.theme["base-input"]};
+    border: 1px solid ${(props) => props.theme["base-border"]};
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    outline: unset;
+    font-size: 1rem;
     color: ${(props) => props.theme["base-label"]};
-  }
 
-  &:focus {
-    border-color: ${(props) => props.theme.blue};
-    color: ${(props) => props.theme["base-text"]};
+    &::placeholder {
+      color: ${(props) => props.theme["base-label"]};
+    }
+
+    &:focus {
+      border-color: ${(props) => props.theme.blue};
+      color: ${(props) => props.theme["base-text"]};
+    }
   }
 `;
 

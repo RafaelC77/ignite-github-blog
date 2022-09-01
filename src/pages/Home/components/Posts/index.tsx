@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import { api } from "../../../../lib/axios";
 import { Card } from "./components/Card";
 import {
@@ -9,45 +12,48 @@ import {
   SearchBox,
 } from "./styles";
 
-interface Post {
+interface IPost {
   title: string;
   content: string;
   updatedAt: string;
   number: number;
 }
 
-interface IPosts {
-  totalCount: number;
-  postsList: Post[];
-}
+const searchInputSchema = z.object({
+  query: z.string(),
+});
+
+type SearchInput = z.infer<typeof searchInputSchema>;
 
 export function Posts() {
-  const [posts, setPosts] = useState<IPosts | null>(null);
+  const [posts, setPosts] = useState<IPost[]>([]);
 
-  async function fetchPosts(query?: string) {
-    if (!query) {
-      query = "";
-    }
+  const { register, handleSubmit } = useForm<SearchInput>({
+    resolver: zodResolver(searchInputSchema),
+  });
 
+  async function fetchPosts(query: string = "") {
     const response = await api.get("/search/issues", {
       params: {
         q: `repo:rafaelc77/ignite-github-blog ${query}`,
       },
     });
 
-    const updatedPosts = {
-      totalCount: response.data.total_count,
-      postsList: response.data.items.map((post: any) => {
-        return {
-          title: post.title,
-          content: post.body,
-          updatedAt: post.updated_at,
-          number: post.number,
-        };
-      }),
-    };
+    const data = response.data.items;
+    const updatedPosts = data.map((post: any) => {
+      return {
+        title: post.title,
+        content: post.body,
+        updatedAt: post.updated_at,
+        number: post.number,
+      };
+    });
 
     setPosts(updatedPosts);
+  }
+
+  function handleSearch(data: SearchInput) {
+    fetchPosts(data.query);
   }
 
   useEffect(() => {
@@ -60,17 +66,23 @@ export function Posts() {
         <PostsInfo>
           <h2>Publicações</h2>
           <span>
-            {posts?.totalCount === 1
-              ? posts.totalCount + " publicação"
-              : posts?.totalCount + " publicações"}
+            {posts?.length === 1
+              ? posts.length + " publicação"
+              : posts?.length + " publicações"}
           </span>
         </PostsInfo>
       </PostsHeader>
 
-      <SearchBox placeholder="Buscar conteúdo" />
+      <SearchBox onSubmit={handleSubmit(handleSearch)}>
+        <input
+          type="text"
+          placeholder="Buscar conteúdo"
+          {...register("query")}
+        />
+      </SearchBox>
 
       <PostsList>
-        {posts?.postsList.map((post) => {
+        {posts?.map((post) => {
           return (
             <Card
               key={post.number}

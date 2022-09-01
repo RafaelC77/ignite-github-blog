@@ -1,5 +1,5 @@
 import ReactMarkdown from "react-markdown";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { setDistance } from "../../../../../../utils/formatDate";
 
 import { CardContainer, CardContent, CardHeader } from "./styles";
@@ -18,7 +18,7 @@ export function Card({ title, content, updatedAt, number }: CardProps) {
 
   return (
     <CardContainer>
-      <NavLink to={`/post/${number}`}>
+      <Link to={`/post/${number}`}>
         <CardContent>
           <CardHeader>
             <h3>{title}</h3>
@@ -27,7 +27,7 @@ export function Card({ title, content, updatedAt, number }: CardProps) {
 
           <ReactMarkdown>{preview}</ReactMarkdown>
         </CardContent>
-      </NavLink>
+      </Link>
     </CardContainer>
   );
 }

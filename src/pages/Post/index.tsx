@@ -1,10 +1,17 @@
-import { FaCalendarDay, FaChevronLeft, FaComment } from "react-icons/fa";
-import { BsBoxArrowUpRight, BsGithub } from "react-icons/bs";
-
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { Link, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+  faCalendar,
+  faComment,
+  faChevronLeft,
+  faArrowUpRightFromSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { api } from "../../lib/axios";
+import { setDistance } from "../../utils/formatDate";
 
 import {
   Info,
@@ -14,8 +21,6 @@ import {
   PostContent,
   PostInfo,
 } from "./styles";
-import { useParams } from "react-router-dom";
-import { setDistance } from "../../utils/formatDate";
 
 interface IPost {
   title: string;
@@ -55,29 +60,29 @@ export function Post() {
     <PostContainer>
       <PostInfo>
         <NavBar>
-          <a href="/">
-            <FaChevronLeft />
+          <Link to="/">
+            <FontAwesomeIcon icon={faChevronLeft} />
             <span>VOLTAR</span>
-          </a>
-          <a href={post?.link}>
+          </Link>
+          <Link to={post?.link}>
             <span>VER NO GITHUB</span>
-            <BsBoxArrowUpRight />
-          </a>
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+          </Link>
         </NavBar>
 
         <h1>{post?.title}</h1>
 
         <InfoBar>
           <Info>
-            <BsGithub />
+            <FontAwesomeIcon icon={faGithub} />
             <span>{post?.author}</span>
           </Info>
           <Info>
-            <FaCalendarDay />
+            <FontAwesomeIcon icon={faCalendar} />
             <span>{post.date}</span>
           </Info>
           <Info>
-            <FaComment />
+            <FontAwesomeIcon icon={faComment} />
             <span>
               {post!.commentsAmount <= 1
                 ? post?.commentsAmount + " comentário"

@@ -28,10 +28,17 @@ export const NavBar = styled.nav`
     color: ${(props) => props.theme.blue};
     font-size: 0.75rem;
     font-weight: 700;
+    border-bottom: 1px solid transparent;
 
     display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    transition: 0.2s;
+
+    &:hover {
+      border-color: ${(props) => props.theme.blue};
+    }
   }
 `;
 

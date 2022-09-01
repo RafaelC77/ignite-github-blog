@@ -26,10 +26,17 @@ export const ProfileContent = styled.div`
     gap: 0.5rem;
     text-decoration: none;
     color: ${(props) => props.theme.blue};
+    border-bottom: 1px solid transparent;
 
     position: absolute;
     top: 0;
     right: 0;
+
+    transition: 0.2s;
+
+    &:hover {
+      border-color: ${(props) => props.theme.blue};
+    }
 
     span {
       font-size: 0.75rem;

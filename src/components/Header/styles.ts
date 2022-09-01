@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import headerBackground from "../../assets/header-background.png";
 
 export const HeaderContainer = styled.header`
   width: 100vw;
-  background-image: url("src/assets/header-background.png");
+  background-image: url(${headerBackground});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

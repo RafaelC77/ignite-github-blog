@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import { api } from "../../../../lib/axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUpRightFromSquare,
+  faUserGroup,
+} from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { BsGithub, BsBoxArrowUpRight } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 
@@ -54,19 +60,23 @@ export function Profile() {
 
           <GithubStats>
             <Stat>
-              <BsGithub />
+              <FontAwesomeIcon icon={faGithub} />
               <span>{profileData?.userName}</span>
             </Stat>
             <Stat>
-              <HiUsers />
-              <span>{profileData?.followers}</span>
+              <FontAwesomeIcon icon={faUserGroup} />
+              <span>
+                {profileData?.followers === 1
+                  ? profileData?.followers + " seguidor"
+                  : profileData?.followers + " seguidores"}
+              </span>
             </Stat>
           </GithubStats>
         </ProfileInfo>
 
         <a href={profileData?.githubLink}>
           <span>GITHUB</span>
-          <BsBoxArrowUpRight />
+          <FontAwesomeIcon icon={faUpRightFromSquare} />
         </a>
       </ProfileContent>
     </ProfileContainer>
