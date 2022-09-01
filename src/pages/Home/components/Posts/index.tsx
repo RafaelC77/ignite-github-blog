@@ -38,9 +38,7 @@ export function Posts() {
         q: `repo:rafaelc77/ignite-github-blog ${query}`,
       },
     });
-
-    const data = response.data.items;
-    const updatedPosts = data.map((post: any) => {
+    const updatedPosts = response.data.items.map((post: any) => {
       return {
         title: post.title,
         content: post.body,

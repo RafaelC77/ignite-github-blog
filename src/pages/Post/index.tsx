@@ -32,10 +32,13 @@ interface IPost {
 }
 
 export function Post() {
-  const [post, setPost] = useState({} as IPost);
+  const [post, setPost] = useState<IPost>({} as IPost);
+  const [isLoading, setIsLoading] = useState(true);
   const { number } = useParams();
 
   async function fetchPost() {
+    setIsLoading(true);
+
     const response = await api.get(
       `/repos/rafaelc77/ignite-github-blog/issues/${number}`
     );
@@ -50,6 +53,7 @@ export function Post() {
     };
 
     setPost(updatedPost);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -57,44 +61,50 @@ export function Post() {
   }, []);
 
   return (
-    <PostContainer>
-      <PostInfo>
-        <NavBar>
-          <Link to="/">
-            <FontAwesomeIcon icon={faChevronLeft} />
-            <span>VOLTAR</span>
-          </Link>
-          <Link to={post?.link}>
-            <span>VER NO GITHUB</span>
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-          </Link>
-        </NavBar>
+    <>
+      {isLoading ? (
+        <span>carregando...</span>
+      ) : (
+        <PostContainer>
+          <PostInfo>
+            <NavBar>
+              <Link to="/">
+                <FontAwesomeIcon icon={faChevronLeft} />
+                <span>VOLTAR</span>
+              </Link>
+              <a href={post.link}>
+                <span>VER NO GITHUB</span>
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+              </a>
+            </NavBar>
 
-        <h1>{post?.title}</h1>
+            <h1>{post.title}</h1>
 
-        <InfoBar>
-          <Info>
-            <FontAwesomeIcon icon={faGithub} />
-            <span>{post?.author}</span>
-          </Info>
-          <Info>
-            <FontAwesomeIcon icon={faCalendar} />
-            <span>{post.date}</span>
-          </Info>
-          <Info>
-            <FontAwesomeIcon icon={faComment} />
-            <span>
-              {post!.commentsAmount <= 1
-                ? post?.commentsAmount + " comentário"
-                : post?.commentsAmount + " comentários"}
-            </span>
-          </Info>
-        </InfoBar>
-      </PostInfo>
+            <InfoBar>
+              <Info>
+                <FontAwesomeIcon icon={faGithub} />
+                <span>{post.author}</span>
+              </Info>
+              <Info>
+                <FontAwesomeIcon icon={faCalendar} />
+                <span>{post.date}</span>
+              </Info>
+              <Info>
+                <FontAwesomeIcon icon={faComment} />
+                <span>
+                  {post!.commentsAmount <= 1
+                    ? post.commentsAmount + " comentário"
+                    : post.commentsAmount + " comentários"}
+                </span>
+              </Info>
+            </InfoBar>
+          </PostInfo>
 
-      <PostContent>
-        <ReactMarkdown>{post?.content}</ReactMarkdown>
-      </PostContent>
-    </PostContainer>
+          <PostContent>
+            <ReactMarkdown>{post.content}</ReactMarkdown>
+          </PostContent>
+        </PostContainer>
+      )}
+    </>
   );
 }

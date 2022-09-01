@@ -6,8 +6,6 @@ import {
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { BsGithub, BsBoxArrowUpRight } from "react-icons/bs";
-import { HiUsers } from "react-icons/hi";
 
 import {
   GithubStats,
@@ -27,7 +25,9 @@ interface ProfileData {
 }
 
 export function Profile() {
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [profileData, setProfileData] = useState<ProfileData>(
+    {} as ProfileData
+  );
 
   useEffect(() => {
     async function fetchProfile() {
