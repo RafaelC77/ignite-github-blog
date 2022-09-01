@@ -53,7 +53,6 @@ export const ProfileContent = styled.div`
 export const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
   h1 {
     font-size: 1.5rem;
@@ -70,6 +69,8 @@ export const ProfileInfo = styled.div`
 export const GithubStats = styled.div`
   display: flex;
   gap: 1.5rem;
+
+  margin-top: auto;
 `;
 
 export const Stat = styled.div`
