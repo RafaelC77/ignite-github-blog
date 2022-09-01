@@ -1,10 +1,11 @@
 import { FaCalendarDay, FaChevronLeft, FaComment } from "react-icons/fa";
 import { BsBoxArrowUpRight, BsGithub } from "react-icons/bs";
+
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { formatDistance } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
 
 import { api } from "../../lib/axios";
+
 import {
   Info,
   InfoBar,
@@ -13,8 +14,8 @@ import {
   PostContent,
   PostInfo,
 } from "./styles";
-
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { setDistance } from "../../utils/formatDate";
 
 interface IPost {
   title: string;
@@ -26,17 +27,18 @@ interface IPost {
 }
 
 export function Post() {
-  const [post, setPost] = useState<IPost | null>(null);
+  const [post, setPost] = useState({} as IPost);
+  const { number } = useParams();
 
   async function fetchPost() {
     const response = await api.get(
-      "/repos/rafaelc77/ignite-github-blog/issues/3"
+      `/repos/rafaelc77/ignite-github-blog/issues/${number}`
     );
 
     const updatedPost = {
       title: response.data.title,
       author: response.data.user.login,
-      date: response.data.updated_at,
+      date: setDistance(response.data.updated_at),
       commentsAmount: response.data.comments,
       content: response.data.body,
       link: response.data.html_url,
@@ -49,15 +51,11 @@ export function Post() {
     fetchPost();
   }, []);
 
-  const distance = formatDistance(new Date(), new Date(post!.date), {
-    locale: ptBR,
-  });
-
   return (
     <PostContainer>
       <PostInfo>
         <NavBar>
-          <a href="">
+          <a href="/">
             <FaChevronLeft />
             <span>VOLTAR</span>
           </a>
@@ -76,7 +74,7 @@ export function Post() {
           </Info>
           <Info>
             <FaCalendarDay />
-            <span>{distance}</span>
+            <span>{post.date}</span>
           </Info>
           <Info>
             <FaComment />
@@ -90,7 +88,7 @@ export function Post() {
       </PostInfo>
 
       <PostContent>
-        <ReactMarkdown>{post!.content}</ReactMarkdown>
+        <ReactMarkdown>{post?.content}</ReactMarkdown>
       </PostContent>
     </PostContainer>
   );
