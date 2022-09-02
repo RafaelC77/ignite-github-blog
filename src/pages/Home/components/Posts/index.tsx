@@ -11,6 +11,7 @@ import {
   PostsList,
   SearchBox,
 } from "./styles";
+import { LoadingScreen } from "../../../../components/LoadingScreen";
 
 interface IPost {
   title: string;
@@ -27,6 +28,7 @@ type SearchInput = z.infer<typeof searchInputSchema>;
 
 export function Posts() {
   const [posts, setPosts] = useState<IPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { register, handleSubmit } = useForm<SearchInput>({
     resolver: zodResolver(searchInputSchema),
@@ -56,42 +58,49 @@ export function Posts() {
 
   useEffect(() => {
     fetchPosts();
+    setIsLoading(false);
   }, []);
 
   return (
     <PostsContainer>
-      <PostsHeader>
-        <PostsInfo>
-          <h2>Publicações</h2>
-          <span>
-            {posts?.length === 1
-              ? posts.length + " publicação"
-              : posts?.length + " publicações"}
-          </span>
-        </PostsInfo>
-      </PostsHeader>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          <PostsHeader>
+            <PostsInfo>
+              <h2>Publicações</h2>
+              <span>
+                {posts?.length === 1
+                  ? posts.length + " publicação"
+                  : posts?.length + " publicações"}
+              </span>
+            </PostsInfo>
+          </PostsHeader>
 
-      <SearchBox onSubmit={handleSubmit(handleSearch)}>
-        <input
-          type="text"
-          placeholder="Buscar conteúdo"
-          {...register("query")}
-        />
-      </SearchBox>
-
-      <PostsList>
-        {posts?.map((post) => {
-          return (
-            <Card
-              key={post.number}
-              title={post.title}
-              updatedAt={post.updatedAt}
-              content={post.content}
-              number={post.number}
+          <SearchBox onSubmit={handleSubmit(handleSearch)}>
+            <input
+              type="text"
+              placeholder="Buscar conteúdo"
+              {...register("query")}
             />
-          );
-        })}
-      </PostsList>
+          </SearchBox>
+
+          <PostsList>
+            {posts?.map((post) => {
+              return (
+                <Card
+                  key={post.number}
+                  title={post.title}
+                  updatedAt={post.updatedAt}
+                  content={post.content}
+                  number={post.number}
+                />
+              );
+            })}
+          </PostsList>
+        </>
+      )}
     </PostsContainer>
   );
 }

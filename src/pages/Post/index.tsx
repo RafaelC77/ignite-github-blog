@@ -21,6 +21,7 @@ import {
   PostContent,
   PostInfo,
 } from "./styles";
+import { LoadingScreen } from "../../components/LoadingScreen";
 
 interface IPost {
   title: string;
@@ -63,7 +64,7 @@ export function Post() {
   return (
     <>
       {isLoading ? (
-        <span>carregando...</span>
+        <LoadingScreen />
       ) : (
         <PostContainer>
           <PostInfo>

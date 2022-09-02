@@ -14,6 +14,7 @@ import {
   ProfileInfo,
   Stat,
 } from "./styles";
+import { LoadingScreen } from "../../../../components/LoadingScreen";
 
 interface ProfileData {
   avatarUrl: string;
@@ -28,6 +29,7 @@ export function Profile() {
   const [profileData, setProfileData] = useState<ProfileData>(
     {} as ProfileData
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -46,39 +48,44 @@ export function Profile() {
     }
 
     fetchProfile();
+    setIsLoading(false);
   }, []);
 
   return (
     <ProfileContainer>
-      <ProfileContent>
-        <img src={profileData?.avatarUrl} alt="" />
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <ProfileContent>
+          <img src={profileData?.avatarUrl} alt="" />
 
-        <ProfileInfo>
-          <h1>{profileData?.name}</h1>
+          <ProfileInfo>
+            <h1>{profileData?.name}</h1>
 
-          <p>{profileData?.bio}</p>
+            <p>{profileData?.bio}</p>
 
-          <GithubStats>
-            <Stat>
-              <FontAwesomeIcon icon={faGithub} />
-              <span>{profileData?.userName}</span>
-            </Stat>
-            <Stat>
-              <FontAwesomeIcon icon={faUserGroup} />
-              <span>
-                {profileData?.followers === 1
-                  ? profileData?.followers + " seguidor"
-                  : profileData?.followers + " seguidores"}
-              </span>
-            </Stat>
-          </GithubStats>
-        </ProfileInfo>
+            <GithubStats>
+              <Stat>
+                <FontAwesomeIcon icon={faGithub} />
+                <span>{profileData?.userName}</span>
+              </Stat>
+              <Stat>
+                <FontAwesomeIcon icon={faUserGroup} />
+                <span>
+                  {profileData?.followers === 1
+                    ? profileData?.followers + " seguidor"
+                    : profileData?.followers + " seguidores"}
+                </span>
+              </Stat>
+            </GithubStats>
+          </ProfileInfo>
 
-        <a href={profileData?.githubLink}>
-          <span>GITHUB</span>
-          <FontAwesomeIcon icon={faUpRightFromSquare} />
-        </a>
-      </ProfileContent>
+          <a href={profileData?.githubLink}>
+            <span>GITHUB</span>
+            <FontAwesomeIcon icon={faUpRightFromSquare} />
+          </a>
+        </ProfileContent>
+      )}
     </ProfileContainer>
   );
 }

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
   width: 100%;
+  height: 13.25rem;
   padding: 2rem 2.5rem;
 
   background-color: ${(props) => props.theme["base-profile"]};
