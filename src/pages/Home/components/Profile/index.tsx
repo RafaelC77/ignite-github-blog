@@ -17,6 +17,8 @@ import {
 } from "./styles";
 import { LoadingScreen } from "../../../../components/LoadingScreen";
 
+const userName = import.meta.env.VITE_GITHUB_USERNAME;
+
 interface ProfileData {
   avatarUrl: string;
   name: string;
@@ -36,7 +38,7 @@ export function Profile() {
   useEffect(() => {
     async function fetchProfile() {
       setIsLoading(true);
-      const response = await api.get("/users/rafaelc77");
+      const response = await api.get(`/users/${userName}`);
 
       const profile = {
         avatarUrl: response.data.avatar_url,

@@ -23,6 +23,9 @@ import {
 } from "./styles";
 import { LoadingScreen } from "../../components/LoadingScreen";
 
+const userName = import.meta.env.VITE_GITHUB_USERNAME;
+const repoName = import.meta.env.VITE_GITHUB_REPONAME;
+
 interface IPost {
   title: string;
   author: string;
@@ -41,7 +44,7 @@ export function Post() {
     setIsLoading(true);
 
     const response = await api.get(
-      `/repos/rafaelc77/ignite-github-blog/issues/${number}`
+      `/repos/${userName}/${repoName}/issues/${number}`
     );
 
     const updatedPost = {

@@ -13,6 +13,9 @@ import {
 } from "./styles";
 import { LoadingScreen } from "../../../../components/LoadingScreen";
 
+const userName = import.meta.env.VITE_GITHUB_USERNAME;
+const repoName = import.meta.env.VITE_GITHUB_REPONAME;
+
 interface IPost {
   title: string;
   content: string;
@@ -37,7 +40,7 @@ export function Posts() {
   async function fetchPosts(query: string = "") {
     const response = await api.get("/search/issues", {
       params: {
-        q: `repo:rafaelc77/ignite-github-blog ${query}`,
+        q: `repo:${userName}/${repoName} ${query}`,
       },
     });
     const updatedPosts = response.data.items.map((post: any) => {
