@@ -2,17 +2,24 @@ import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
   width: 100%;
-  height: 13.25rem;
+  height: 100%;
+  min-height: 13.25rem;
   padding: 2rem 2.5rem;
+  overflow: hidden;
 
   background-color: ${(props) => props.theme["base-profile"]};
   border-radius: 10px;
   box-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1.5rem;
+  }
 `;
 
 export const ProfileContent = styled.div`
   display: flex;
   position: relative;
+  height: 100%;
 
   img {
     height: 9.25rem;
@@ -49,11 +56,27 @@ export const ProfileContent = styled.div`
       width: 0.75rem;
     }
   }
+
+  @media (max-width: 768px) {
+    img {
+      height: 7.25rem;
+      width: 7.25rem;
+      margin-right: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 `;
 
 export const ProfileInfo = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   h1 {
     font-size: 1.5rem;
@@ -69,7 +92,9 @@ export const ProfileInfo = styled.div`
 
 export const GithubStats = styled.div`
   display: flex;
-  gap: 1.5rem;
+  column-gap: 1.5rem;
+  row-gap: 0.5rem;
+  flex-wrap: wrap;
 
   margin-top: auto;
 `;

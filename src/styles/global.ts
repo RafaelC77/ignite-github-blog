@@ -21,4 +21,16 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
+
+    @media (max-width: 992px) {
+        html {
+            font-size: 93.75%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        html {
+            font-size: 87.5%;
+        }
+    }
 `;

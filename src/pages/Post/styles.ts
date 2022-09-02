@@ -44,8 +44,10 @@ export const NavBar = styled.nav`
 
 export const InfoBar = styled.div`
   display: flex;
-  gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 0.5rem;
   margin-top: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 export const Info = styled.div`

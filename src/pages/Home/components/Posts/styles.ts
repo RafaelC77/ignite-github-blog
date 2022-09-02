@@ -53,7 +53,12 @@ export const PostsList = styled.ul`
   margin-top: 3rem;
   list-style: none;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  flex-wrap: wrap;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;

@@ -8,6 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
+import { LoadingScreen } from "../../../../components/LoadingScreen";
+
 import {
   GithubStats,
   ProfileContainer,
@@ -15,7 +17,6 @@ import {
   ProfileInfo,
   Stat,
 } from "./styles";
-import { LoadingScreen } from "../../../../components/LoadingScreen";
 
 const userName = import.meta.env.VITE_GITHUB_USERNAME;
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.li`
-  max-width: 416px;
+  width: 100%;
 
   a:hover {
     text-decoration: none;
@@ -43,5 +43,11 @@ export const CardHeader = styled.header`
     color: ${(props) => props.theme["base-span"]};
     text-align: right;
     line-height: 160%;
+  }
+
+  @media (max-width: 768px) {
+    h3 {
+      max-width: 580px;
+    }
   }
 `;
