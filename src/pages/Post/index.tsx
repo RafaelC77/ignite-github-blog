@@ -93,7 +93,7 @@ export function Post() {
               <Info>
                 <FontAwesomeIcon icon={faComment} />
                 <span>
-                  {post!.commentsAmount <= 1
+                  {post!.commentsAmount === 1
                     ? post.commentsAmount + " comentário"
                     : post.commentsAmount + " comentários"}
                 </span>

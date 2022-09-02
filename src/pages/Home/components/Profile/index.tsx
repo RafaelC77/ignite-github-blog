@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUpRightFromSquare,
   faUserGroup,
+  faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
@@ -23,6 +24,7 @@ interface ProfileData {
   userName: string;
   followers: number;
   githubLink: string;
+  location: string;
 }
 
 export function Profile() {
@@ -43,6 +45,7 @@ export function Profile() {
         userName: response.data.login,
         followers: response.data.followers,
         githubLink: response.data.html_url,
+        location: response.data.location,
       };
 
       setProfileData(profile);
@@ -58,30 +61,36 @@ export function Profile() {
         <LoadingScreen />
       ) : (
         <ProfileContent>
-          <img src={profileData?.avatarUrl} alt="" />
+          <img src={profileData.avatarUrl} alt="" />
 
           <ProfileInfo>
-            <h1>{profileData?.name}</h1>
+            <h1>{profileData.name}</h1>
 
-            <p>{profileData?.bio}</p>
+            <p>{profileData.bio}</p>
 
             <GithubStats>
               <Stat>
                 <FontAwesomeIcon icon={faGithub} />
-                <span>{profileData?.userName}</span>
+                <span>{profileData.userName}</span>
               </Stat>
+
+              <Stat>
+                <FontAwesomeIcon icon={faBuilding} />
+                <span>{profileData.location}</span>
+              </Stat>
+
               <Stat>
                 <FontAwesomeIcon icon={faUserGroup} />
                 <span>
-                  {profileData?.followers === 1
-                    ? profileData?.followers + " seguidor"
-                    : profileData?.followers + " seguidores"}
+                  {profileData.followers === 1
+                    ? profileData.followers + " seguidor"
+                    : profileData.followers + " seguidores"}
                 </span>
               </Stat>
             </GithubStats>
           </ProfileInfo>
 
-          <a href={profileData?.githubLink}>
+          <a href={profileData.githubLink}>
             <span>GITHUB</span>
             <FontAwesomeIcon icon={faUpRightFromSquare} />
           </a>
