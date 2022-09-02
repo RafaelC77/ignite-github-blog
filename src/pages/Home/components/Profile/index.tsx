@@ -33,6 +33,7 @@ export function Profile() {
 
   useEffect(() => {
     async function fetchProfile() {
+      setIsLoading(true);
       const response = await api.get("/users/rafaelc77");
 
       const profile = {

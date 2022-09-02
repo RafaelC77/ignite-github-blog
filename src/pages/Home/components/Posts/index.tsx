@@ -57,6 +57,7 @@ export function Posts() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     fetchPosts();
     setIsLoading(false);
   }, []);
