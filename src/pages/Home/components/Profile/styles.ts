@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 212px;
   min-height: 13.25rem;
   padding: 2rem 2.5rem;
   overflow: hidden;
@@ -12,12 +12,14 @@ export const ProfileContainer = styled.div`
   box-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
 
   @media (max-width: 768px) {
+    height: 100%;
     padding: 1.5rem 1.5rem;
   }
 `;
 
 export const ProfileContent = styled.div`
   display: flex;
+  align-items: center;
   position: relative;
   height: 100%;
 
