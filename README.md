@@ -19,3 +19,7 @@ Foi utilizada a API do Github para buscar dados do usuário, listar as issues cr
 ## Post
 
 ![Captura de tela de 2022-09-05 09-38-31](https://user-images.githubusercontent.com/91793932/188451306-8ca05457-6c43-488d-b503-ab3e1de24d9c.png)
+
+## Deploy
+
+[Github Blog](https://rafaelc77-github-blog.netlify.app/)
