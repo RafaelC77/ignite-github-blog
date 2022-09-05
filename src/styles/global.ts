@@ -5,6 +5,24 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+
+        scrollbar-width: thin;
+        scrollbar-color: ${(props) => props.theme["base-profile"]} ${(props) =>
+  props.theme["base-label"]};
+
+        ::-webkit-scrollbar {
+            width: 0.675rem;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: ${(props) => props.theme["base-profile"]};
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: ${(props) => props.theme["base-label"]};
+            border-radius: 99px;
+
+        }
     }
 
     body {
